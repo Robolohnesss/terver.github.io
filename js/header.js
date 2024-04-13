@@ -10,6 +10,7 @@ template.innerHTML = `
                 <li><a href="task_page.html?id=2">Ковбой Джон</a></li>
                 <li><a href="task_page.html?id=3">Шахматы</a></li>
                 <li><a href="task_page.html?id=4">Фабрики</a></li>
+                <li><a href="task_page.html?id=5">Пенсионеры</a></li>
                 </ul>
                 </li>
             </ul>

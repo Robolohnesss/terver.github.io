@@ -18,6 +18,9 @@ function DetectTask(){
     if(id == 4){
         GenerateTask4();
     }
+    if(id == 5){
+        GenerateTask5();
+    }
 }
 function GenButton(){
     if(id == 1){
@@ -31,6 +34,9 @@ function GenButton(){
     }
     if(id == 4){
         GenerateTask4();
+    }
+    if(id == 5){
+        GenerateTask5();
     }
 }
 function ShowSolve(){
@@ -46,7 +52,11 @@ function ShowSolve(){
     if(id == 4){
         ShowSolve4();
     }
+    if(id == 5){
+        ShowSolve5();
+    }
 }
+
 
 // 1st task
 function GenerateTask1(){
@@ -92,6 +102,7 @@ function ShowSolve1(){
             showbutton_pressed = true;
             document.getElementById('solve_button').textContent = "Спрятать решение";
             return;
+            
     }
     if(showbutton_pressed == true){
         document.getElementById('solve_button').textContent = "Показать решение";
@@ -101,7 +112,7 @@ function ShowSolve1(){
     }
 }
 
-// 2st task
+// 2nd task
 function GenerateTask2(){
     a = Math.ceil(Math.random() * 10);
     b = Math.ceil(Math.random()* 10);
@@ -153,7 +164,7 @@ function ShowSolve2(){
     }
 }
 
-// 3st task
+// 3rd task
 function GenerateTask3(){
     a = Math.ceil(Math.random() * 100);
     b = Math.ceil(Math.random()* 100);
@@ -199,7 +210,7 @@ function ShowSolve3(){
     }
 }
 
-// 4st task
+// 4th task
 function GenerateTask4(){
     a = Math.ceil(Math.random() * 100);
     b = Math.ceil(Math.random()* 25);
@@ -240,6 +251,64 @@ function ShowSolve4(){
             showbutton_pressed = true;
             document.getElementById('solve_button').textContent = "Спрятать решение";
             return;
+    }
+    if(showbutton_pressed == true){
+        document.getElementById('solve_button').textContent = "Показать решение";
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        showbutton_pressed = false;
+        return
+    }
+}
+
+// 5th
+function GenerateTask5(){
+    a = Math.ceil(Math.random() * 50);
+    b = Math.ceil(Math.random() * 60);
+    c = Math.ceil(Math.random() * 50);
+    var answ = ((b * 0.01).toFixed(2) - (c * 0.01).toFixed(2) + (a * 0.01).toFixed(2)*(c * 0.01).toFixed(2))/(a * 0.01);
+
+    if(answ < 0.99 && answ > 0.1){
+        document.getElementById('task_text').textContent = `В городе ${a}% взрослого населения  — мужчины. Пенсионеры составляют ${b}% взрослого населения, причём доля пенсионеров среди женщин равна ${c}%. Для социологического опроса выбран случайным образом мужчина, проживающий в этом городе. Найдите вероятность события «выбранный мужчина является пенсионером». Ответ округлите до одного знака после запятой.`;
+    }
+    else{
+        GenerateTask5();
+    }
+    if(showbutton_pressed){
+        const canvas = document.getElementById('task_pic');
+        const context = canvas.getContext('2d');
+        document.getElementById('solve_button').textContent = "Показать решение";
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        showbutton_pressed = false;
+    }
+}
+
+function ShowSolve5(){
+    const canvas = document.getElementById('task_pic');
+    const context = canvas.getContext('2d');
+    if(showbutton_pressed == false){
+        canvas.width = 900;
+        canvas.height = 700;
+        var pic = new Image();
+        pic.src = "img/taskpens.png";
+        pic.onload = function(){
+            context.drawImage(pic, 0, 0);
+        }
+        context.font = '30pt Calibri';
+        context.fillText((a * 0.01).toFixed(2),225,205);
+        context.fillText(((100 - a) * 0.01).toFixed(2),595,205);
+        context.fillText("...",470,430);
+        context.fillText((c * 0.01).toFixed(2),710,430);
+        context.fillText("x",360,430);
+        context.fillText("...",110,430);
+        context.fillText(`Всего пенсионеров: ${(b * 0.01).toFixed(2)}`,230,500);
+        context.fillText(`Уравнение: ${(a * 0.01).toFixed(2)}x + ${((100 - a) * 0.01).toFixed(2)} * ${(c * 0.01).toFixed(2)} = ${(b * 0.01).toFixed(2)}`,130,560);
+        
+        var answ = (((b * 0.01).toFixed(2) - (c * 0.01).toFixed(2) + (a * 0.01).toFixed(2)*(c * 0.01).toFixed(2))/(a * 0.01).toFixed(2)).toFixed(1);
+        
+        context.fillText(`Ответ: ${answ}`,130,620);
+        showbutton_pressed = true;
+        document.getElementById('solve_button').textContent = "Спрятать решение";
+        return;
     }
     if(showbutton_pressed == true){
         document.getElementById('solve_button').textContent = "Показать решение";
